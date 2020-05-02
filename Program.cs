@@ -9,31 +9,28 @@ namespace SpindleAndFeedv3
 {
     class Program
     {
-        static void Main()
+        private static void Main()
         {
             ISpindleAndFeedCalculator berekening = Factory.SpindleAndFeed();
 
             
             double diameter = Scherm("Geef de diameter in : ");
 
-            Console.WriteLine(diameter);
 
-            double vsnelheid = Scherm("Geef de v snelheid in : ");
-
-            Console.WriteLine(vsnelheid);
-            Console.ReadLine();
+            double vsnelheid = Scherm("\nGeef de v snelheid in : ");
 
 
+            double spindleSnelheid = berekening.Spindle(diameter, vsnelheid);
 
-
-            double spindleSnelheid = (berekening.Spindle(diameter, vsnelheid));
-            double tanden = 6, voedingTand= 0.12;
             
-            Console.WriteLine($"Spindle snelheid is {spindleSnelheid:0:3}");
+            Console.WriteLine($"\n\nSpindle snelheid is {spindleSnelheid:F2}");
 
-            int feedSnelheid =Convert.ToInt32(berekening.Feed(spindleSnelheid, tanden, voedingTand));
+            double tanden = Scherm("\nGeef het aantal tanden in: ");
+            double voedingTand = Scherm("\nGeef de voeding per tand in: ");
 
-            Console.WriteLine($"\nFeed snelheid is {feedSnelheid}");
+            int feedSnelheid = Convert.ToInt32(berekening.Feed(spindleSnelheid, tanden, voedingTand));
+
+            Console.WriteLine($"\nFeed snelheid is {feedSnelheid:F2}");
 
             Console.ReadLine();
         }
@@ -54,9 +51,7 @@ namespace SpindleAndFeedv3
             string tekstControle = Regex.Replace(tekstControleBijna, "[.]",",");
             bool dubbel = double.TryParse(tekstControle,out _);
 
-            Console.WriteLine(dubbel);
-
-            Console.ReadLine();
+            
 
             if (dubbel && (tekstControle.Length > 0))
             {
@@ -79,13 +74,7 @@ namespace SpindleAndFeedv3
         }
     }
 
-    public static class Factory
-    {
-        public static ISpindleAndFeedCalculator SpindleAndFeed()
-        {
-            return new SpindleAndFeedCalculator();
-        }
-    }
+   
 
 
 }
