@@ -25,6 +25,7 @@ namespace SpindleAndFeedv3
             
             Console.WriteLine($"\n\nSpindle snelheid is {spindleSnelheid:F2}");
 
+
             double tanden = Scherm("\nGeef het aantal tanden in: ");
             double voedingTand = Scherm("\nGeef de voeding per tand in: ");
 
